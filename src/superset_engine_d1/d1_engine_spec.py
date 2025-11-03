@@ -1,7 +1,6 @@
 # superset/db_engine_specs/d1.py
 from superset.db_engine_specs.base import BaseEngineSpec
 from sqlalchemy.engine.reflection import Inspector
-import sqlalchemy_d1
 from typing import Optional, List, Dict
 
 
