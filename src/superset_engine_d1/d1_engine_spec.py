@@ -135,7 +135,17 @@ class D1EngineSpec(BaseEngineSpec):
         Return list of columns for a given table.
         """
         try:
-            return inspector.get_columns(table, schema=options)
+            cols = [
+                {
+                    "column_name": col["name"],  # map here
+                    "type": col["type"],
+                    "nullable": col.get("nullable", True),
+                    "default": col.get("default"),
+                    "autoincrement": col.get("autoincrement", False),
+                }
+                for col in inspector.get_columns(table.table)
+            ]
+            return cols
         except Exception as e:
             raise RuntimeError(
                 f"D1EngineSpec: Failed to fetch columns for {table}: {e}"
